@@ -5,6 +5,16 @@ data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparab
     override fun compareTo(other: MyDate): Int {
         return (year.compareTo(other.year) * 100) + (month.compareTo(other.month) * 10) + dayOfMonth.compareTo(other.dayOfMonth)
     }
+
+    operator fun plus(interval: TimeInterval): MyDate {
+        if (interval == TimeInterval.YEAR) {
+            return MyDate(this.year + 1, this.month, this.dayOfMonth)
+        } else {
+            val extraDays = if (interval == TimeInterval.WEEK) 7 else 1
+            return MyDate(this.year, this.month, this.dayOfMonth + extraDays)
+        }
+    }
+
 }
 
 operator fun MyDate.rangeTo(other: MyDate): DateRange = DateRange(this, other)

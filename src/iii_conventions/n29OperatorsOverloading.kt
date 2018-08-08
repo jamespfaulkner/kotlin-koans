@@ -20,8 +20,8 @@ fun todoTask29(): Nothing = TODO(
     })
 
 fun task29_1(today: MyDate): MyDate {
-    todoTask29()
-//    return today + YEAR + WEEK
+//    todoTask29()
+    return today + YEAR + WEEK
 }
 
 fun task29_2(today: MyDate): MyDate {
