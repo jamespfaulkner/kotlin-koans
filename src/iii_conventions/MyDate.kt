@@ -58,8 +58,4 @@ class DateRange(val start: MyDate, val endInclusive: MyDate) {
     }
 }
 
-class RepeatedTimeInterval(val ti: TimeInterval, val n: Int) {
-    override fun toString(): String {
-        return "ti $ti n $n"
-    }
-}
+data class RepeatedTimeInterval(val ti: TimeInterval, val n: Int)
