@@ -7,14 +7,16 @@ data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparab
     }
 
     operator fun plus(interval: TimeInterval): MyDate {
-        if (interval == TimeInterval.YEAR) {
-            return MyDate(this.year + 1, this.month, this.dayOfMonth)
-        } else {
-            val extraDays = if (interval == TimeInterval.WEEK) 7 else 1
-            return MyDate(this.year, this.month, this.dayOfMonth + extraDays)
-        }
+        return this.addTimeIntervals(interval, 1)
     }
 
+    operator fun plus(interval: RepeatedTimeInterval): MyDate {
+        return if (interval.n == 0) {
+            this
+        } else {
+            this + interval.ti + RepeatedTimeInterval(interval.ti, interval.n - 1)
+        }
+    }
 }
 
 operator fun MyDate.rangeTo(other: MyDate): DateRange = DateRange(this, other)
@@ -22,7 +24,13 @@ operator fun MyDate.rangeTo(other: MyDate): DateRange = DateRange(this, other)
 enum class TimeInterval {
     DAY,
     WEEK,
-    YEAR
+    YEAR;
+
+    operator fun times(n: Int): RepeatedTimeInterval{
+        val repeatedTimeInterval = RepeatedTimeInterval(this, n)
+        println("Repeated Interval " + repeatedTimeInterval)
+        return repeatedTimeInterval
+    }
 }
 
 class DateRange(val start: MyDate, val endInclusive: MyDate) {
@@ -47,5 +55,11 @@ class DateRange(val start: MyDate, val endInclusive: MyDate) {
             }
 
         }
+    }
+}
+
+class RepeatedTimeInterval(val ti: TimeInterval, val n: Int) {
+    override fun toString(): String {
+        return "ti $ti n $n"
     }
 }

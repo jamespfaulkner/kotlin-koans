@@ -12,6 +12,10 @@ class N29OperatorsOverloadingKtTest {
         assertEquals(MyDate(1983, 5, 29), MyDate(1983, 5, 22).addTimeIntervals(WEEK, 1))
     }
 
+    @Test fun testAddGreaterThanMonth() {
+        assertEquals(MyDate(1983, 7, 1), MyDate(1983, 5, 22).addTimeIntervals(DAY, 40))
+    }
+
     @Test fun testAddOneTimeInterval() {
         assertEquals(MyDate(2015, 5, 8), task29_1(MyDate(2014, 5, 1)))
     }
