@@ -3,13 +3,10 @@ package iii_conventions
 import util.TODO
 
 
-class Invokable {
-
-    var n = 0
+class Invokable(private val n: Int = 0) {
 
     operator fun invoke() : Invokable {
-        n += 1
-        return this
+        return Invokable(this.n + 1)
     }
 
     fun getNumberOfInvocations(): Int = n
